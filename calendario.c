@@ -36,7 +36,6 @@ void addUser(User mat[][5], int sizes[])
         strcpy(u.name, name);
         u.dia = dia;
         u.year = year;
-        u.gender = g;
         mat[mes - 1][sizes[mes - 1]] = u;
         sizes[mes - 1]++;
     }
