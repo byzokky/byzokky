@@ -30,11 +30,11 @@ void alquilarLocal((local_t **centroComercial, int pisos, int locales);
 
 void eliminarLocal(local_t **centroComercial, int pisos, int locales);
 
-void editarLocal(local_t **centroComercial, int pisos, int localesPiso);
+void editarLocal(local_t **centroComercial, int pisos, int locales);
 
-void TopVentas(local_t **centroComercial, int pisos, int localesPiso);
+void TopVentas(local_t **centroComercial, int pisos, int locales);
 
-void comprarEn(local_t **centroComercial, int pisos, int localesPiso);
+void comprarEn(local_t **centroComercial, int pisos, int locales);
 
 void gananciasCC(local_t **centroComercial, int pisos, int locales);
 
