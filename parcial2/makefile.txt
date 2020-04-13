@@ -1,0 +1,10 @@
+all: Programa
+
+Programa: FuncionesCC Main
+	gcc -o out main.o FuncionesCC.o	
+
+FuncionesCC: FuncionesCC.c FuncionesCC.h
+	gcc -c FuncionesCC.c
+
+Main: main.c FuncionesCC.c
+	gcc -c main.c
