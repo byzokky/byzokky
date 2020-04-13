@@ -228,7 +228,7 @@ void gananciasCC(local_t **centroComercial, int pisos, int locales){
 			ganancias += (centroComercial[i][j].GTotal*0.3);
 		}
 	}
-	printf("las ganancias totoales para el CENTRO VERTCAL DE AUTOGESTION es de: %f\n");
+	printf("las ganancias totoales para el CENTRO VERTCAL DE AUTOGESTION es de: %f\n", ganancias);
 }
 
 
