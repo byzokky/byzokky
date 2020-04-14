@@ -57,7 +57,7 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
             if (centroComercial[i][j].pisoLocal == numPiso && centroComercial[i][j].numLocalxPiso == numLocalxPiso && centroComercial[i][j].idLocal != 0){
             	printf("Nombre del local es %s\n", centroComercial[numPiso][numLocalxPiso].nombreLocal);
             	printf("Id del local es %d\n", centroComercial[numPiso][numLocalxPiso].idLocal);
-            	printf("Precio manejado por el local es %d\n", centroComercial[numPiso][numLocalxPiso].precip);
+            	printf("Precio manejado por el local es %d\n", centroComercial[numPiso][numLocalxPiso].precio);
             	printf("Ganancias totales del local es %d\n", centroComercial[numPiso][numLocalxPiso].GTotal);
             	cont = 1;
 			}
@@ -68,7 +68,7 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
 }
 
 
-void alquilarLocal((local_t **centroComercial, int pisos, int locales){
+void alquilarLocal(local_t **centroComercial, int pisos, int locales){
     int piso, local;
     while (1){
         printf("Piso\n");
