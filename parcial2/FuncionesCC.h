@@ -26,7 +26,7 @@ int menu();
 
 int menuEdit();
 
-void alquilarLocal((local_t **centroComercial, int pisos, int locales);
+void alquilarLocal(local_t **centroComercial, int pisos, int locales);
 
 void eliminarLocal(local_t **centroComercial, int pisos, int locales);
 
