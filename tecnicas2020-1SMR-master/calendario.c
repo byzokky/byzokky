@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "user.h"
+/* Falta el uso de enums y la función recursiva 
+Ojo estándar de nombramiento*/
+
 int menu()
 {
     int opc;
