@@ -20,6 +20,7 @@ int menu(){
     printf("7: Comprar\n");
     printf("8: Ganancias\n");
     printf("9: Planos del CVA\n");
+    printf("10: ordenar\n");
     printf("0: Salir\n");
     scanf("%d", &opc);
     return opc;
@@ -50,6 +51,40 @@ int menuEdit(){
 }
 
 
+
+void selection_sort(local_t **centroComercial, int pisos, int locales){
+     int j, i, x;
+	 local_t temp;
+	 for (i = 0; i < pisos; i++){
+	 	for(j = 0; x < locales - 1; x++){
+	 }
+}
+
+
+ void insert_sort(local_t **centroComercial, int pisos, int locales){
+	int i, j, x, temp;
+	for(i = 0; i < pisos; i++){
+		for(x = 0; x < locales; x++){
+			temp = centroComercial[i][x];
+			j = x - 1;
+			while(j >= 0 && centroComercial[j] > temp){
+				centroComercial[i][j+1] = centroComercial[i][j];
+				j--;
+			}
+		}
+		centroComercial[i][j+1] = temp;
+	}
+}
+
+
+void merge_sort(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
+	
+}
+
+
+quick_sort(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
+	
+}
 /* Funcion de ejemplo que imprimiria la informacion de un local */
 void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
 	int cont = 0;
@@ -81,9 +116,8 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
 
 
 void alquilarLocal(local_t **centroComercial, int pisos, int locales){
-    int piso, local; 
+    int piso, local, genero; 
     int meta = 1;
-    int genero;
     int disponible = planosCC(centroComercial,  pisos,  locales);
     if (disponible != 0){
 		
@@ -297,3 +331,10 @@ int planosCC(local_t **centroComercial, int pisos, int locales){
 	}
 	return disponibles;
 }
+
+
+
+
+
+
+

@@ -79,6 +79,22 @@ int main(){
 		case 9: int disponibles = planosCC(centroComercial, pisos, locales);
 				printf("\n%d locales libre", disponible);
 				break;
+		
+		
+		case 10: int opc = ordenamientos();
+				 switch(opc){
+					 case 1: seletion_sort(centroComercial, pisos, locales);
+							 break;
+					 case 2: insert_sort(centroComercial, pisos, locales);
+							 break;
+					 case 3: merge_sort(centroComercial, pisos, locales);
+							 break;
+					 case 4: quick_sort(centroComercial, pisos, locales);
+							 break;
+					 default:
+						 printf("opcion invalida");
+				 }
+				 break;
 				
 		
 		case 0: printf ("gracias por venir");

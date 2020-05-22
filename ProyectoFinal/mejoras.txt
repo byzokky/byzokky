@@ -23,3 +23,10 @@
 	|Modificacion en la funcion planosCC.
 
 	|Modificacion en la funcion de reporte de locales.
+
+[22/05/2020 edit 3]
+	|Agregar las finciones de ordenamiento.
+
+	|Estuve estancado ven cuestion de como aplicarlos debido a que tanto se ordena automaticamente los pisos y los locales.
+
+	|Dicidi que todas estas 4 funciones va a ser para el ordenamiento de otras opciones mediante un nuevo arreglo que va a mostrar el ordenamiento. 
