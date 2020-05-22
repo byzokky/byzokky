@@ -4,3 +4,5 @@
 	|Funcion planosCC pasaron de void a int.
 
 	|Funcion alquilarLocal posee recursion y ya no puede quedarse en un ciclo infinito.
+	
+	| El Makefile fue adecuado a los nuevos nombres.
