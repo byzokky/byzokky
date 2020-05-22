@@ -1,0 +1,6 @@
+[22/05/2000 edit 1]
+	mejorar las indicaciones de la profesora dadas en los comentarios del parcial 2
+
+	|Funcion planosCC pasaron de void a int.
+
+	|Funcion alquilarLocal posee recursion y ya no puede quedarse en un ciclo infinito.
