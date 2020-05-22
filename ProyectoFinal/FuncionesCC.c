@@ -7,7 +7,6 @@ int idLocal(){
 	return id;
 }
 
-
 int menu(){
 	int opc;
     printf("BIENVENIDO AL CENTRO VERTCAL DE AUTOGESTION\n");
@@ -26,13 +25,25 @@ int menu(){
     return opc;
 }
 
+int generos(){
+	int opc;
+	printf("Que genero es su local?\n");
+	printf("=================\n");
+	printf("1: MODA\n");
+	printf("2: TECNOLOGIA\n");
+	printf("3: HOGAR\n");
+	printf("0: OTROS\n");
+	scanf("%d",opc);
+	return opc;
+}
 
 int menuEdit(){
 	int opc;
-	printf("Que decia editar?\n");
+	printf("Que decide editar?\n");
 	printf("=================\n");
 	printf("1: Editar Nombre\n");
-	printf("2: Editar Precio menejado");
+	printf("2: Editar Precio menejado\n");
+	printf("3: Editar genero del local\n");
 	printf("0: salir\n");
 	scanf("%d",opc);
 	return opc;
@@ -59,7 +70,8 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
             	printf("Id del local es %d\n", centroComercial[numPiso][numLocalxPiso].idLocal);
             	printf("Precio manejado por el local es %d\n", centroComercial[numPiso][numLocalxPiso].precio);
             	printf("Ganancias totales del local es %d\n", centroComercial[numPiso][numLocalxPiso].GTotal);
-            	cont = 1;
+            	printf("El local es de %d\n", centroComercial[numPiso][numLocalxPiso].genero);
+				cont = 1;
 			}
 		}
 	}
@@ -71,6 +83,7 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
 void alquilarLocal(local_t **centroComercial, int pisos, int locales){
     int piso, local; 
     int meta = 1;
+    int genero;
     int disponible = planosCC(centroComercial,  pisos,  locales);
     if (disponible != 0){
 		
@@ -90,15 +103,28 @@ void alquilarLocal(local_t **centroComercial, int pisos, int locales){
 	        else
 	            meta = 0;
 	    }
-	
+		
+		meta = 1;
 	    printf("Nombre del local\n");
 	    scanf("%35s", centroComercial[piso - 1][local - 1].nombreLocal);
 	    centroComercial[piso - 1][local - 1].idLocal = id();
 	    centroComercial[piso - 1][local - 1].pisoLocal = piso;
 	    centroComercial[piso - 1][local - 1].numLocalxPiso = local;
+	    while (meta){
+		    genero = generos();
+		    if (genero < 1 || genero > 4){
+		    	print("opcion incorrecta\n");
+			}
+			else{
+		    	meta = 0;
+			}
+		}
+		centroComercial[piso - 1][local - 1].genero = genero;
 		printf("ingrese el precio de venta que maneja este local\n");
 		scanf("%d",centroComercial[piso][local].precio);
 	    centroComercial[piso][local].GTotal = 0;
+		
+	    
 	}
 	else{
 		printf("todos los locales estan alquilados, elimine un local si quiere uno nuevo [opc 2 en menu]")
@@ -144,27 +170,36 @@ void editarLocal(local_t **centroComercial, int pisos, int locales){
 	if (local != NULL);{
 		if (local->idLocal != 0){
 			int opc = menuEdit();
-			if (opc == 1){
-			    printf("Nombre Nuevo\n");
-    			scanf("%34s", nombre);
-    			strcpy(local->nombreLocal, nombre);
-			}
-			else if (opc == 2){
-				int precioN;
-				printf("Precio Nuevo\n");
-    			scanf("%d", precioN);
-    			local->precio = precioN;
-			}
-			else if (opc == 0){
-				printf("gracias por todo, se a salido del menu de edicion\n");
-				break;
-			}
-			else{
-				printf("Error de digitacion, , se a salido de la edicion\n")
-			}
+			switch(opc){
+				case 1:
+					    printf("Nombre Nuevo\n");
+		    			scanf("%34s", nombre);
+		    			strcpy(local->nombreLocal, nombre);
+		    			break;
+			
+				case 2:
+						int precioN;
+						printf("Precio Nuevo\n");
+		    			scanf("%d", precioN);
+		    			local->precio = precioN;
+		    			break;
+			
+				case 3:
+						int generoN;
+						printf("nuevo genero\n");
+		    			scanf("%d", generoN);
+		    			local->genero = generoN;
+		    			break;
+			
+				case 0:
+						printf("gracias por todo, se a salido del menu de edicion\n");
+						break;
+			
+			default:
+				printf("Error de digitacion\n");
 		}
 		else
-			printf("Local clausulado\n");
+			printf("Local clausurado\n");
 	
 	}
 	else
@@ -183,13 +218,14 @@ void TopVentas(local_t **centroComercial, int pisos, int locales){
     char local3[35];
 	for (i = 0; i <pisos; i++){
     	for (j = 0; j < locales; j++){
-    		if (centroComercial[i][j].GTotal > Top1)
-    		Top3 = Top2;
-    		local3 = local2;
-			Top2 = Top1;
-    		local2 = local1;
-			Top1 = centroComercial[i][j].GTotal;
-    		local1 = centroComercial[i][j].nombreLocal;
+    		if (centroComercial[i][j].GTotal > Top1){
+	    		Top3 = Top2;
+	    		local3 = local2;
+				Top2 = Top1;
+	    		local2 = local1;
+				Top1 = centroComercial[i][j].GTotal;
+	    		local1 = centroComercial[i][j].nombreLocal;
+	    	}
 		}
 	}
 	printf("puesto #1 = %35s ---- %d", local1, Top1);
@@ -252,6 +288,7 @@ int planosCC(local_t **centroComercial, int pisos, int locales){
             	printf("Id del local es %d\n", centroComercial[i][j].idLocal);
             	printf("Precio manejado por el local es %d\n", centroComercial[i][j].precio);
             	printf("Ganancias totales del local es %d\n", centroComercial[i][j].GTotal);
+            	printf("El local es de %d\n", centroComercial[numPiso][numLocalxPiso].genero);
 			}
 			else
 				printf("local [%d][%d] libre para alquilar\n", i, j);

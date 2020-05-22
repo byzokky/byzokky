@@ -48,6 +48,7 @@ int main(){
 			            	fprintf("Id del local es %d\n", centroComercial[i][j].idLocal);
 			            	fprintf("Precio manejado por el local es %d\n", centroComercial[i][j].precip);
 			            	fprintf("Ganancias totales del local es %d\n", centroComercial[i][j].GTotal);
+			            	fprintf("El local es de %d\n", centroComercial[numPiso][numLocalxPiso].genero);
 						}
 						else
 							fprintf("local [%d][%d] libre para alquilar\n", i, j);

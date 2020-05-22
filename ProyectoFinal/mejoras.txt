@@ -1,8 +1,25 @@
-[22/05/2000 edit 1]
-	mejorar las indicaciones de la profesora dadas en los comentarios del parcial 2
+[22/05/2020 edit 1]
+	|Mejorar las indicaciones de la profesora dadas en los comentarios del parcial 2
 
 	|Funcion planosCC pasaron de void a int.
 
 	|Funcion alquilarLocal posee recursion y ya no puede quedarse en un ciclo infinito.
 	
-	| El Makefile fue adecuado a los nuevos nombres.
+	|El Makefile fue adecuado a los nuevos nombres.
+
+	|Modificacion en la funcion TopVentas en el nombre de las variables.
+
+[22/05/2020 edit 2]
+	|Agregar variable enum al struct.
+
+	|Agregar un menu para dedicir el genero del local.
+
+	|Modificacion en la funcion mostrarLocal.
+
+	|Modificacion en la funcion alquilarLocal.
+
+	|Modificacion en la funcion editarLocal.
+
+	|Modificacion en la funcion planosCC.
+
+	|Modificacion en la funcion de reporte de locales.
