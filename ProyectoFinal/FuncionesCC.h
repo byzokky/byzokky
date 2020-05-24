@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <conio.h>
 
 
 typedef enum generoLocal{
@@ -32,6 +33,26 @@ int menu();
 int generos();
 
 int menuEdit();
+
+int ordenaientos();
+
+void intercambiar(int *a, int *b);
+
+int particion(local_t muestra[], int izquierda, int derecha);
+
+void merge(local_t arr[], int l, int m, int r);
+
+void mergeSortAux(local_t *muestra, int p, int longitud);
+
+void quickSortAux(local_t muestra[], int izquierda, int derecha);
+
+void selection_sort(local_t **centroComercial, int pisos, int locales);
+
+void insert_sort(local_t **centroComercial, int pisos, int locales);
+
+void merge_sort(local_t **centroComercial, int pisos, int locales);
+
+void quick_sort(local_t **centroComercial, int pisos, int locales);
 
 void alquilarLocal(local_t **centroComercial, int pisos, int locales);
 

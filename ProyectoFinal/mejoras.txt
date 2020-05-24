@@ -29,4 +29,11 @@
 
 	|Estuve estancado ven cuestion de como aplicarlos debido a que tanto se ordena automaticamente los pisos y los locales.
 
-	|Dicidi que todas estas 4 funciones va a ser para el ordenamiento de otras opciones mediante un nuevo arreglo que va a mostrar el ordenamiento. 
+	|Dicidi que todas estas 4 funciones va a ser para el ordenamiento de otras opciones mediante un nuevo arreglo que va a mostrar el ordenamiento.
+
+[24/05/2020 edit 4]
+	|Terminar funciones ordenamientos QS MS IS y SS.
+
+	|Agregar funcion de manejo binario para guardar.
+
+	|Agregar funcion de manejo binario para cargar.

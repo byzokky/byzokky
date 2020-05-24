@@ -20,7 +20,9 @@ int menu(){
     printf("7: Comprar\n");
     printf("8: Ganancias\n");
     printf("9: Planos del CVA\n");
-    printf("10: ordenar\n");
+    printf("10: Ordenar\n");
+    printf("11: Guardar en archivo\n");
+    printf("12: Cargar una demo del CVA\n");
     printf("0: Salir\n");
     scanf("%d", &opc);
     return opc;
@@ -51,40 +53,222 @@ int menuEdit(){
 }
 
 
+int ordenamientos(){
+	int opc;
+	pritnf("De que forma quieres ordenar?\n");
+	printf("=============================\n");
+	printf("1: De mayor ganancia a menor ganancia\n");
+	printf("2: De menor ganancia a mayor ganancia\n");
+	printf("3: De mayor precio a menor precio\n");
+	printf("4: De menor precio a maoyr precio\n");
+	printf("0: Salir\n");
+	scanf("%d",opc);
+	return opc;
+}
+
+void intercambiar(int *a, int *b) {
+  int temporal = *a;
+  *a = *b;
+  *b = temporal;
+}
+
+
+int particion(local_t muestra[], int izquierda, int derecha){
+  int bandera = 1;
+  int pivote = muestra[izquierda].precio;
+  while (bandera){
+    while (muestra[izquierda].precio < pivote){
+      izquierda++;
+    }
+    while (muestra[derecha].precio > pivote){
+      derecha--;
+    }
+    if (izquierda >= derecha){
+      return derecha;
+    }
+	else{
+      intercambiar(&muestra[izquierda].precio, &muestra[derecha].precio);
+      izquierda++;
+      derecha--;
+    }
+  }
+}
+
+
+void merge(local_t arr[], int l, int m, int r){ 
+    int i, j, k; 
+    int n1 = m - l + 1; 
+    int n2 =  r - m; 
+  
+    /* create temp arrays */
+    int L[n1], R[n2]; 
+  
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++) 
+        L[i] = arr[l + i]; 
+    for (j = 0; j < n2; j++) 
+        R[j] = arr[m + 1+ j]; 
+  
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray 
+    j = 0; // Initial index of second subarray 
+    k = l; // Initial index of merged subarray 
+    while (i < n1 && j < n2) 
+    { 
+        if (L[i] <= R[j]) 
+        { 
+            arr[k].precio = L[i].precio; 
+            i++; 
+        } 
+        else
+        { 
+            arr[k].precio = R[j].precio; 
+            j++; 
+        } 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of L[], if there 
+       are any */
+    while (i < n1) 
+    { 
+        arr[k] = L[i]; 
+        i++; 
+        k++; 
+    } 
+  
+    /* Copy the remaining elements of R[], if there 
+       are any */
+    while (j < n2) 
+    { 
+        arr[k] = R[j]; 
+        j++; 
+        k++; 
+    } 
+} 
+
+
+void mergeSortAux(local_t *muestra, int p, int longitud){
+    if (p < longitud)
+    {
+        // Dividir el problema en subproblemas
+        int q = (p + longitud)/2;
+        
+        // Resolver el problema de manera recursiva hasta llegar a una solucion trivial
+        mergeSortAux(muestra, p, q);
+        mergeSortAux(muestra, q + 1, longitud);
+        
+        // Fusion de resultados parciales
+        merge(muestra, p, q, longitud);
+    }
+}
+
+
+void quickSortAux(local_t muestra[], int izquierda, int derecha){
+  if (izquierda < derecha) {
+    int indiceParticion = particion(muestra, izquierda, derecha);
+    quickSortAux(muestra, izquierda, indiceParticion);
+    quickSortAux(muestra, indiceParticion + 1, derecha);
+  }
+}
+
 
 void selection_sort(local_t **centroComercial, int pisos, int locales){
-     int j, i, x;
-	 local_t temp;
-	 for (i = 0; i < pisos; i++){
-	 	for(j = 0; x < locales - 1; x++){
+    int j, i, x = 0;
+	local_t temp;
+	local_t muestra [pisos*locales];
+	for (i = 0; i < pisos; i++){
+	 	for(j = 0; j < locales; j++){
+	 		muestra[x]= centroComercial[i][j];
+	 		x++;
+		}
+	}
+	int actual, mas_pequeno;
+     for (actual = 0; actual < pisos*locales - 1; actual++){
+         mas_pequeno = actual;
+         for (j = actual 1; j < pisos*locales; j++)
+              if (muestra[j].GTotal < muestra[mas_pequeno].GTotal)
+                  mas_pequeno = j;
+          temp = muestra[actual].GTotal;
+          muestra[actual].GTotal = muestra[mas_pequeno].GTotal;
+          muestra[mas_pequeno].GTotal = temp;
+     }
+     for(x = 0; x < pisos*locales; x++){
+     	printf("Nombre del local es %s\n", muestra[x].nombreLocal);
+        printf("Id del local es %d\n", muestra[x].idLocal);
+        printf("Precio manejado por el local es %d\n", muestra[x].precio);
+        printf("Ganancias totales del local es %d\n", muestra[x].GTotal);
+        printf("El local es de %d\n\n\n", muestra[x].genero);
 	 }
 }
 
 
  void insert_sort(local_t **centroComercial, int pisos, int locales){
-	int i, j, x, temp;
-	for(i = 0; i < pisos; i++){
-		for(x = 0; x < locales; x++){
-			temp = centroComercial[i][x];
-			j = x - 1;
-			while(j >= 0 && centroComercial[j] > temp){
-				centroComercial[i][j+1] = centroComercial[i][j];
-				j--;
-			}
+	int i, j, x = 0;
+	local_t temp;
+	local_t muestra [pisos*locales];
+	for (i = 0; i < pisos; i++){
+	 	for(j = 0; j < locales; j++){
+	 		muestra[x]= centroComercial[i][j];
+	 		x++;
 		}
-		centroComercial[i][j+1] = temp;
 	}
+	for(i=0; i<pisos*locales; i++){
+		temp=muestra[i];
+		j=i-1;
+		while(j>=0 && muestra[j] >temp){
+			muestra[j+1] = muestra[j];
+			j--;
+		}
+		muestra[j+1] = temp;
+	}
+	for(x = 0; x < pisos*locales; x++){
+     	printf("Nombre del local es %s\n", muestra[x].nombreLocal);
+        printf("Id del local es %d\n", muestra[x].idLocal);
+        printf("Precio manejado por el local es %d\n", muestra[x].precio);
+        printf("Ganancias totales del local es %d\n", muestra[x].GTotal);
+        printf("El local es de %d\n\n\n", muestra[x].genero);
+	 }
 }
 
 
-void merge_sort(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
-	
+void merge_sort(local_t **centroComercial, int pisos, int locales){
+	int j, i, x = 0, p = 0;
+	local_t temp;
+	local_t muestra [pisos*locales];
+	for (i = 0; i < pisos; i++){
+	 	for(j = 0; j < locales; j++){
+	 		muestra[x]= centroComercial[i][j];
+	 		x++;
+		}
+	}
+	int longitud = sizeof muestra / sizeof muestra[0] - 1;
+	mergeSortAux(muestra, p, longitud);
 }
 
 
-quick_sort(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
-	
+quick_sort(local_t **centroComercial, int pisos, int locales){
+	int j, i, x = 0;
+	local_t temp;
+	local_t muestra [pisos*locales];
+	for (i = 0; i < pisos; i++){
+	 	for(j = 0; j < locales; j++){
+	 		muestra[x]= centroComercial[i][j];
+	 		x++;
+		}
+	}
+	int longitud = sizeof muestra / sizeof muestra[0];
+	quickSortAux(muestra, 0, longitud - 1);
+	for(x = 0; x < pisos*locales; x++){
+     	printf("Nombre del local es %s\n", muestra[x].nombreLocal);
+        printf("Id del local es %d\n", muestra[x].idLocal);
+        printf("Precio manejado por el local es %d\n", muestra[x].precio);
+        printf("Ganancias totales del local es %d\n", muestra[x].GTotal);
+        printf("El local es de %d\n\n\n", muestra[x].genero);
+	 }
 }
+
+
 /* Funcion de ejemplo que imprimiria la informacion de un local */
 void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso){
 	int cont = 0;
@@ -331,8 +515,6 @@ int planosCC(local_t **centroComercial, int pisos, int locales){
 	}
 	return disponibles;
 }
-
-
 
 
 

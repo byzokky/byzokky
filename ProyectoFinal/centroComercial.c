@@ -19,21 +19,28 @@ int main(){
             centroComercial[i][j].idLocal = 0;
     }
     
-    FILE *r = fopen( "reporte.txt", "rb" ); 
-	fclose( r );
+    FILE *r = fopen("reporte.txt", "rb"); 
+	fclose(r);
+	FILE *s = fopen("save", "wb");
+	fclose(s);
+	FILE *d = fopen("demo", "rb");
+	fclose(d);
 
 	do{
 		opc = menu();
 		switch(opc){
-		case 1: mostrarLocal(centroComercial, pisos, locales);
+		case 1: system ("cls");
+				mostrarLocal(centroComercial, pisos, locales);
 				break;
 		
 		
-		case 2: alquilarLocal(centroComercial, pisos, locales);
+		case 2: system ("cls");
+				alquilarLocal(centroComercial, pisos, locales);
 				break;
 		
 		
-		case 3: eliminarLocal(centroComercial, pisos, locales);
+		case 3: system ("cls");
+				eliminarLocal(centroComercial, pisos, locales);
 				break;
 		
 		
@@ -54,34 +61,41 @@ int main(){
 							fprintf("local [%d][%d] libre para alquilar\n", i, j);
 					}
 				}
-				fclose( r );
-				printf( "Se genero reporte.txt.\n" );
-				system( "notepad reporte.txt" );
+				fflush(r);
+				fclose(r);
+				printf("Se genero reporte.txt.\n");
+				system("notepad reporte.txt");
 				break;
 				
 				
-		case 5: editarLocal(centroComercial, pisos, locales);
+		case 5: system ("cls");
+				editarLocal(centroComercial, pisos, locales);
 				break;
 		
 		
-		case 6: TopVentas(centroComercial);
+		case 6: system ("cls");
+				TopVentas(centroComercial);
 				break;
 				
 				
-		case 7: comprarEn(centroComercial, pisos, locales);
+		case 7: system ("cls");
+				comprarEn(centroComercial, pisos, locales);
 				break;
 				
 				
-		case 8: gananciasCC(centroComercial, pisos, locales);
+		case 8: system ("cls");
+				gananciasCC(centroComercial, pisos, locales);
 				break;
 				
 				
-		case 9: int disponibles = planosCC(centroComercial, pisos, locales);
+		case 9: system ("cls");
+				int disponibles = planosCC(centroComercial, pisos, locales);
 				printf("\n%d locales libre", disponible);
 				break;
 		
 		
-		case 10: int opc = ordenamientos();
+		case 10: system ("cls");
+				 int opc = ordenamientos();
 				 switch(opc){
 					 case 1: seletion_sort(centroComercial, pisos, locales);
 							 break;
@@ -91,13 +105,46 @@ int main(){
 							 break;
 					 case 4: quick_sort(centroComercial, pisos, locales);
 							 break;
+					 case 0: printf("gracias por ordenar\n");
+					 		 break;
 					 default:
 						 printf("opcion invalida");
 				 }
 				 break;
+		
+		
+		case 11: s = fopen( "save", "wb" );
+				 if(s == NULL);{
+				 	printf("no se a podido abrir el archivo save");
+				 }
+				 else{
+					 for (i = 0; i < pisos; i++){
+				        for (j = 0; j < locales; j++){
+							fwrite(&centroComercial[i][j], sizeof(local_t), 1, s);
+						}
+					 }
+				 }
+				 fflush(s);
+				 fclose(s);
+				 break;
+		
+		
+		case 12: d = fopen( "demo", "rb");
+				 if(d == NULL);{
+				 	printf("no se a podido abrir el archivo demo");
+				 }
+				 else{
+				 	for (i = 0; i < pisos; i++){
+				        for (j = 0; j < locales; j++){
+				        	fread(&centroCmercial[i][j], sizeof(local_t), 1, d);
+				        }
+				 }
+				 fclose(d);
+				 break;
 				
 		
-		case 0: printf ("gracias por venir");
+		case 0: system ("cls");
+				printf ("gracias por venir");
 				break;
 				
 				
