@@ -101,7 +101,7 @@ void merge(local_t arr[], int l, int m, int r){
     int n2 =  r - m; 
   
     /* create temp arrays */
-    int L[n1], R[n2]; 
+    local_t L[n1], R[n2]; 
   
     /* Copy data to temp arrays L[] and R[] */
     for (i = 0; i < n1; i++) 
@@ -115,7 +115,7 @@ void merge(local_t arr[], int l, int m, int r){
     k = l; // Initial index of merged subarray 
     while (i < n1 && j < n2) 
     { 
-        if (L[i] <= R[j]) 
+        if ( L[i].precio <= R[j].precio) 
         { 
             arr[k].precio = L[i].precio; 
             i++; 
@@ -186,12 +186,12 @@ void selection_sort(local_t **centroComercial, int pisos, int locales){
 	int actual, mas_pequeno;
      for (actual = 0; actual < pisos*locales - 1; actual++){
          mas_pequeno = actual;
-         for (j = actual 1; j < pisos*locales; j++)
+         for (j = actual; j < pisos*locales; j++)
               if (muestra[j].GTotal < muestra[mas_pequeno].GTotal)
                   mas_pequeno = j;
-          temp = muestra[actual].GTotal;
-          muestra[actual].GTotal = muestra[mas_pequeno].GTotal;
-          muestra[mas_pequeno].GTotal = temp;
+          temp = muestra[actual];
+          muestra[actual] = muestra[mas_pequeno];
+          muestra[mas_pequeno] = temp;
      }
      for(x = 0; x < pisos*locales; x++){
      	printf("Nombre del local es %s\n", muestra[x].nombreLocal);
@@ -216,7 +216,7 @@ void selection_sort(local_t **centroComercial, int pisos, int locales){
 	for(i=0; i<pisos*locales; i++){
 		temp=muestra[i];
 		j=i-1;
-		while(j>=0 && muestra[j] >temp){
+		while(j>=0 && muestra[j].GTotal >temp.GTotal){
 			muestra[j+1] = muestra[j];
 			j--;
 		}
@@ -345,7 +345,7 @@ void alquilarLocal(local_t **centroComercial, int pisos, int locales){
 	    
 	}
 	else{
-		printf("todos los locales estan alquilados, elimine un local si quiere uno nuevo [opc 2 en menu]")
+		printf("todos los locales estan alquilados, elimine un local si quiere uno nuevo [opc 2 en menu]");
 	}
 }
 
@@ -382,7 +382,7 @@ void editarLocal(local_t **centroComercial, int pisos, int locales){
     for (i = 0; i < pisos; i++){
         for (j = 0; j < locales; j++){
             if (!strcmp(centroComercial[i][j].nombreLocal, nombre))
-    			local_t *local = &centroComercial[i][j];
+    			local = &centroComercial[i][j];
     	}
 	}
 	if (local != NULL);{
@@ -415,10 +415,10 @@ void editarLocal(local_t **centroComercial, int pisos, int locales){
 			
 			default:
 				printf("Error de digitacion\n");
-		}
-		else
+			}
+		else{
 			printf("Local clausurado\n");
-	
+		}
 	}
 	else
 		printf("No se encontro local\n");
@@ -463,7 +463,7 @@ void comprarEn(local_t **centroComercial, int pisos, int locales){
     for (i = 0; i < pisos; i++){
         for (j = 0; j < locales; j++){
             if (!strcmp(centroComercial[i][j].nombreLocal, nombre))
-    			local_t *local = &centroComercial[i][j];
+    			local = &centroComercial[i][j];
     	}
 	}
 	
@@ -497,20 +497,20 @@ void gananciasCC(local_t **centroComercial, int pisos, int locales){
 int planosCC(local_t **centroComercial, int pisos, int locales){
 	int i;
 	int j;
-	disponibles = 0;
+	int disponibles = 0;
     for (i = 0; i < pisos; i++){
         for (j = 0; j < locales; j++){
-        	if(centroComercial[i][j] !=0){
+        	if(centroComercial[i][j].idLocal !=0){
             	printf("Nombre del local es %s\n", centroComercial[i][j].nombreLocal);
             	printf("Local numero %d del piso %d\n", j, i);
             	printf("Id del local es %d\n", centroComercial[i][j].idLocal);
             	printf("Precio manejado por el local es %d\n", centroComercial[i][j].precio);
             	printf("Ganancias totales del local es %d\n", centroComercial[i][j].GTotal);
-            	printf("El local es de %d\n", centroComercial[numPiso][numLocalxPiso].genero);
+            	printf("El local es de %d\n", centroComercial[i][j].genero);
 			}
 			else
 				printf("local [%d][%d] libre para alquilar\n", i, j);
-				disponobles++;
+				disponibles++;
 		}
 	}
 	return disponibles;

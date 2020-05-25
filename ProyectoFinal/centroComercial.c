@@ -49,13 +49,13 @@ int main(){
 				fprintf( r, "==================================================\n" );
 				for (i = 0; i < pisos; i++){
 			        for (j = 0; j < locales; j++){
-			        	if(centroComercial[i][j] !=0){
+			        	if(centroComercial[i][j].idLocal !=0){
 			            	fprintf("Nombre del local es %s\n", centroComercial[i][j].nombreLocal);
 			            	fprintf("Local numero %d del piso %d\n", j, i);
 			            	fprintf("Id del local es %d\n", centroComercial[i][j].idLocal);
 			            	fprintf("Precio manejado por el local es %d\n", centroComercial[i][j].precip);
 			            	fprintf("Ganancias totales del local es %d\n", centroComercial[i][j].GTotal);
-			            	fprintf("El local es de %d\n", centroComercial[numPiso][numLocalxPiso].genero);
+			            	fprintf("El local es de %d\n", centroComercial[i][j].genero);
 						}
 						else
 							fprintf("local [%d][%d] libre para alquilar\n", i, j);
@@ -90,7 +90,7 @@ int main(){
 				
 		case 9: system ("cls");
 				int disponibles = planosCC(centroComercial, pisos, locales);
-				printf("\n%d locales libre", disponible);
+				printf("\n%d locales libre", disponibles);
 				break;
 		
 		
@@ -118,6 +118,8 @@ int main(){
 				 	printf("no se a podido abrir el archivo save");
 				 }
 				 else{
+				 	fwrite(&pisos, sizeof(pisos),1,s);
+				 	fwrite(&locales, sizeof(locales),1,s);
 					 for (i = 0; i < pisos; i++){
 				        for (j = 0; j < locales; j++){
 							fwrite(&centroComercial[i][j], sizeof(local_t), 1, s);
@@ -134,6 +136,14 @@ int main(){
 				 	printf("no se a podido abrir el archivo demo");
 				 }
 				 else{
+				 	fread(&pisos, sizeof(pisos),1,d);
+				 	fread(&locales, sizeof(pisos),1,d);
+				 	local_t centroComercial =  malloc(sizeof(local_t*) * pisos);
+				    for(i = 0; i < pisos; i++){
+				        centroComercial[i] = malloc(sizeof(local_t) * locales);
+				        for (j = 0; j < pisos; j++)
+				            centroComercial[i][j].idLocal = 0;
+				    }
 				 	for (i = 0; i < pisos; i++){
 				        for (j = 0; j < locales; j++){
 				        	fread(&centroCmercial[i][j], sizeof(local_t), 1, d);
