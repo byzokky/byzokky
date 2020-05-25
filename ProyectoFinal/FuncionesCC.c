@@ -422,6 +422,7 @@ void editarLocal(local_t **centroComercial, int pisos, int locales){
 	}
 	else
 		printf("No se encontro local\n");
+	}
 }
 
 

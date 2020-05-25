@@ -148,6 +148,7 @@ int main(){
 				        for (j = 0; j < locales; j++){
 				        	fread(&centroCmercial[i][j], sizeof(local_t), 1, d);
 				        }
+					}
 				 }
 				 fclose(d);
 				 break;
@@ -161,8 +162,8 @@ int main(){
 		default:
 			printf("opcion invalida\n");
 			break;
-			
-		}while (opc!=0);
-	}
+		}
+	}while (opc!=0);
+	
 	return 0;
 }
