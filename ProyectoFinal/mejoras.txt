@@ -37,3 +37,8 @@
 	|Agregar funcion de manejo binario para guardar.
 
 	|Agregar funcion de manejo binario para cargar.
+
+[25/05/2020 edit 5]
+	|Quitar errores.
+
+	|Agregar funcion de comprobacion de exepciones.
