@@ -287,10 +287,10 @@ void mostrarLocal(local_t ** centroComercial, int numPisos, int numLocalesxPiso)
 		int numPiso = 0;
 		int numLocalxPiso  = 0;
 		printf("Elija el piso\n");
-		scanf("%d", numPiso);
+		scanf("%d", &numPiso);
 		pruebasInt(numPiso);
 		printf("Elija el local\n");
-		scanf("%d", numLocalxPiso);
+		scanf("%d", &numLocalxPiso);
 		pruebasInt(numLocalxPiso);
 		
 		int i;
@@ -355,7 +355,7 @@ void alquilarLocal(local_t **centroComercial, int pisos, int locales){
 		}
 		centroComercial[piso - 1][local - 1].genero = genero;
 		printf("ingrese el precio de venta que maneja este local\n");
-		scanf("%d",centroComercial[piso][local].precio);
+		scanf("%d", &centroComercial[piso][local].precio);
 		pruebasInt(centroCocercial[piso][local].precio);
 	    centroComercial[piso][local].GTotal = 0;
 		
@@ -536,6 +536,23 @@ int planosCC(local_t **centroComercial, int pisos, int locales){
 	return disponibles;
 }
 
+local_t ganancia(local_t **centroComercial, int pisos, int locales){
+	int i;
+	int j;
+	local_t muestra[]= malloc(sizeof(local_t), pisos*locales);
+	int x = 0;
+	
+	for (i = 0; i < pisos; i++){
+		for (j = 0; j < locales; j++){
+			if (centroComercial[i][j].idLocal != 0){
+				if (centroComercial[i][j].GTotal >= 100000){
+					muestra[x] = centroComercial[i][j];
+				}
+			}
+		}
+	}
+	return muestra;
+ }
 
 
 
